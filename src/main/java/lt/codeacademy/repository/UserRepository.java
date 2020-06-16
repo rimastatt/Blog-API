@@ -1,10 +1,9 @@
 package lt.codeacademy.repository;
 
-import lt.codeacademy.entity.Article;
+import lt.codeacademy.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArticleRepository extends JpaRepository<Article, Long> {
-
+public interface UserRepository extends JpaRepository<User, Long> {
 }
