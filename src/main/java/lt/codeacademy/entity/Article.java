@@ -15,26 +15,32 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "article_id")
-    private Integer id;
+    private Long id;
 
-    @Column(name = "Title", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="theme_id")
+    private Theme theme;
+
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "Picture")
+    @Column(name = "picture")
     private String picture;
 
-    @Column(name = "Description", nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "text")
+    @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "tag")
+    @Column(name = "tag", nullable = false)
     private String tag;
 
     @CreationTimestamp
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "Publish_date")
+    @Column(name = "publish_date")
     private Date date;
+
+
 
 }

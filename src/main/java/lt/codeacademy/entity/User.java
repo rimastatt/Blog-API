@@ -13,21 +13,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "Username", nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "Password", nullable = false)
     private String password;
 
-    @Column(name = "firstName")
+    @Column(name = "First_ame", nullable = false)
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "Last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "Email", nullable = false)
     private String email;
 
-    @Column(name = "age")
+    @Column(name = "Age", nullable = false)
     private String age;
 }
