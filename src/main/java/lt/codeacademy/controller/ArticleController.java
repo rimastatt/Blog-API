@@ -1,11 +1,13 @@
 package lt.codeacademy.controller;
 
+import lt.codeacademy.dto.ArticleDTO;
 import lt.codeacademy.entity.Article;
 import lt.codeacademy.service.ArticleService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,7 +21,21 @@ public class ArticleController {
     }
 
     @GetMapping
-    public List<Article> getArticles() {
-        return articleService.getAllArticles();
+    public List<ArticleDTO> getArticles() {
+        List<Article> articlesEntity =  articleService.getAllArticles();
+        List<ArticleDTO> articleDTOS = new ArrayList<>();
+        for(Article articleEntity : articlesEntity){
+            ArticleDTO articleDTO = new ArticleDTO();
+            articleDTO.setId(articleEntity.getId());
+            articleDTO.setTag(articleEntity.getTag());
+            articleDTO.setPicture(articleEntity.getPicture());
+            articleDTO.setDescription(articleEntity.getDescription());
+            articleDTO.setText(articleEntity.getText());
+            articleDTO.setDate(articleEntity.getDate());
+            articleDTO.setTitle(articleEntity.getTitle());
+            articleDTO.setThemeId(articleEntity.getTheme().getId());
+            articleDTOS.add(articleDTO);
+        }
+        return articleDTOS;
     }
 }

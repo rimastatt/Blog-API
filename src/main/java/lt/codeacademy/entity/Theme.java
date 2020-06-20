@@ -1,5 +1,6 @@
 package lt.codeacademy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;

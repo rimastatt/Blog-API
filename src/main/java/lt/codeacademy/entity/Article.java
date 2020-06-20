@@ -1,5 +1,6 @@
 package lt.codeacademy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,7 +19,7 @@ public class Article {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="theme_id")
+    @JoinColumn(name = "theme_id")
     private Theme theme;
 
     @Column(name = "title", nullable = false)
@@ -40,7 +41,6 @@ public class Article {
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "publish_date")
     private Date date;
-
 
 
 }
