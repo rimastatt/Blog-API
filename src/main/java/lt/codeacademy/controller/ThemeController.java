@@ -18,19 +18,20 @@ public class ThemeController {
 
     private ThemeService themeService;
 
-    public ThemeController(ThemeService themeService){
+    public ThemeController(ThemeService themeService) {
         this.themeService = themeService;
     }
 
     @GetMapping
-    public List<ThemeDTO> getThemes(){
+    public List<ThemeDTO> getThemes() {
         List<Theme> themeList = themeService.getAllThemes();
         List<ThemeDTO> themeDTOList = new ArrayList<>();
-        for(Theme theme : themeList){
+        for (Theme theme : themeList) {
             ThemeDTO themeDTO = new ThemeDTO();
             themeDTO.setName(theme.getName());
             themeDTO.setDescription(theme.getDescription());
             themeDTO.setId(theme.getId());
+            themeDTO.setPicture(theme.getPicture());
             themeDTO.setArticlesId(theme.getArticles()
                     .stream()
                     .map(Article::getId)

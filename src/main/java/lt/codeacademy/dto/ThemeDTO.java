@@ -7,9 +7,9 @@ import java.util.List;
 
 @Data
 public class ThemeDTO {
-
     private Long id;
     private List<Long> articlesId = new ArrayList();
     private String name;
+    private String picture;
     private String description;
 }
