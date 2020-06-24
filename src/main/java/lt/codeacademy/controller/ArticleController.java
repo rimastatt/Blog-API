@@ -4,6 +4,7 @@ import lt.codeacademy.dto.ArticleDTO;
 import lt.codeacademy.entity.Article;
 import lt.codeacademy.service.ArticleService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,5 +38,20 @@ public class ArticleController {
             articleDTOS.add(articleDTO);
         }
         return articleDTOS;
+    }
+
+    @GetMapping("{id}")
+    public ArticleDTO getArticle(@PathVariable Long id){
+       Article article = articleService.getArticleById(id);
+       ArticleDTO articleDTO = new ArticleDTO();
+       articleDTO.setId(article.getId());
+       articleDTO.setThemeId(article.getTheme().getId());
+       articleDTO.setTitle(article.getTitle());
+       articleDTO.setDate(article.getDate());
+       articleDTO.setText(article.getText());
+       articleDTO.setDescription(article.getDescription());
+       articleDTO.setPicture(article.getPicture());
+       articleDTO.setTag(article.getTag());
+       return articleDTO;
     }
 }
