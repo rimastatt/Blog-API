@@ -1,5 +1,6 @@
 package lt.codeacademy.service;
 
+import lt.codeacademy.dto.UserDTO;
 import lt.codeacademy.entity.User;
 import lt.codeacademy.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User saveUser(User user) {
+    public User saveUser(UserDTO userDTO) {
+        User user = new User();
+        user.setAge(userDTO.getAge());
+        user.setEmail(userDTO.getEmail());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setPassword(userDTO.getPassword());
+        user.setUsername(userDTO.getUsername());
         return userRepository.save(user);
     }
 

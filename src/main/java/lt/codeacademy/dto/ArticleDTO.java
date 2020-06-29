@@ -2,6 +2,7 @@ package lt.codeacademy.dto;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
+import lt.codeacademy.entity.Theme;
 
 import java.sql.Date;
 
@@ -14,8 +15,7 @@ public class ArticleDTO {
     private Long themeId;
     @NotNull
     private String title;
-    @NotNull
-    private String picture;
+    private String fileName;
     @NotNull
     private String description;
     @NotNull
@@ -23,4 +23,5 @@ public class ArticleDTO {
     @NotNull
     private String tag;
     private Date date;
+    private Theme theme;
 }

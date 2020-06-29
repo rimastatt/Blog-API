@@ -25,8 +25,8 @@ public class Article {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "picture")
-    private String picture;
+    @Column(name = "file_name")
+    private String fileName;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -41,6 +41,4 @@ public class Article {
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "publish_date")
     private Date date;
-
-
 }

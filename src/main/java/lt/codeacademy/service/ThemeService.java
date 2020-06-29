@@ -18,4 +18,8 @@ public class ThemeService {
     public List<Theme> getAllThemes(){
         return themeRepository.findAll();
     }
+
+    public Theme findThemeById(Long id){
+        return themeRepository.getOne(id);
+    }
 }

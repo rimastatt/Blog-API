@@ -19,7 +19,7 @@ public class User {
     @Column(name = "Password", nullable = false)
     private String password;
 
-    @Column(name = "First_ame", nullable = false)
+    @Column(name = "First_name", nullable = false)
     private String firstName;
 
     @Column(name = "Last_name", nullable = false)
@@ -29,5 +29,5 @@ public class User {
     private String email;
 
     @Column(name = "Age", nullable = false)
-    private String age;
+    private Integer age;
 }
