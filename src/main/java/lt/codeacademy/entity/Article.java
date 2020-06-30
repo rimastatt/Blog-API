@@ -1,12 +1,13 @@
 package lt.codeacademy.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,6 +22,9 @@ public class Article {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "theme_id")
     private Theme theme;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="article")
+    private List<Trip> trips = new ArrayList<>();
 
     @Column(name = "title", nullable = false)
     private String title;

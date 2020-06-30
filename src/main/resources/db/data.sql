@@ -14,11 +14,15 @@ insert into Articles(title, file_name, description, text, tag, theme_id) values(
 insert into Articles(title, file_name, description, text, tag, theme_id) values('Bat','fox.jpg','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Sea', 3);
 insert into Articles(title, file_name, description, text, tag, theme_id) values('Elephant','fox.jpg','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'City', 3);
 
-insert into Articles(title, file_name, description, text, tag, theme_id) values('Amygo','dog','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'City', 4);
-insert into Articles(title, file_name, description, text, tag, theme_id) values('Bee','dog','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Desert', 4);
+insert into Articles(title, file_name, description, text, tag, theme_id) values('Amygo','fox.jpg','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'City', 4);
+insert into Articles(title, file_name, description, text, tag, theme_id) values('Bee','fox.jpg','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Desert', 4);
 
-insert into Articles(title, file_name, description, text, tag, theme_id) values('Deer','dog','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Forest', 5);
-insert into Articles(title, file_name, description, text, tag, theme_id) values('Bird','dog','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Sea', 5);
+insert into Articles(title, file_name, description, text, tag, theme_id) values('Deer','fox.jpg','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Forest', 5);
+insert into Articles(title, file_name, description, text, tag, theme_id) values('Bird','fox.jpg','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Sea', 5);
 
-insert into Articles(title, file_name, description, text, tag, theme_id) values('Venom','dog','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Mountains', 6);
-insert into Articles(title, file_name, description, text, tag, theme_id) values('Snaake','dog','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Desert', 6);
+insert into Articles(title, file_name, description, text, tag, theme_id) values('Venom','fox.jpg','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Mountains', 6);
+insert into Articles(title, file_name, description, text, tag, theme_id) values('Snaake','fox.jpg','Ruf ruf ruf', 'Dogs are a very loyal breed blablablablabla', 'Desert', 6);
+
+insert into Trips(article_id, location, price, availability) values(1,'Paris', 599.99, 1);
+insert into Trips(article_id, location, price, availability) values(2,'London', 2599.99, 0);
+insert into Trips(article_id, location, price, availability) values(2,'Madrid', 1599.99, 1);

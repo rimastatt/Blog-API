@@ -4,11 +4,11 @@ import lt.codeacademy.dto.ArticleDTO;
 import lt.codeacademy.entity.Article;
 import lt.codeacademy.entity.Theme;
 import lt.codeacademy.service.ArticleService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,38 +22,17 @@ public class ArticleController {
     }
 
     @GetMapping
-    public List<ArticleDTO> getArticles() {
-        List<Article> articlesEntity = articleService.getAllArticles();
-        List<ArticleDTO> articleDTOS = new ArrayList<>();
-        for (Article articleEntity : articlesEntity) {
-            ArticleDTO articleDTO = new ArticleDTO();
-            articleDTO.setId(articleEntity.getId());
-            articleDTO.setTag(articleEntity.getTag());
-            articleDTO.setFileName(articleEntity.getFileName());
-            articleDTO.setDescription(articleEntity.getDescription());
-            articleDTO.setText(articleEntity.getText());
-            articleDTO.setDate(articleEntity.getDate());
-            articleDTO.setTitle(articleEntity.getTitle());
-            articleDTO.setThemeId(articleEntity.getTheme().getId());
-            articleDTOS.add(articleDTO);
-        }
-        return articleDTOS;
+    public List<ArticleDTO> getArticlesByTheme(@RequestParam(defaultValue = "0") int pageNumber, @PathVariable(required = false) Long themeId) {
+        Page<Article> articlesEntityPage = articleService.getAllArticlesByTheme(pageNumber, themeId);
+        List<Article> articlesEntity = articlesEntityPage.getContent();
+        return ArticleDTO.fromArticleEntityListToDTO(articlesEntity);
+
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/article/{id}")
     public ArticleDTO getArticle(@PathVariable Long id) {
         Article article = articleService.getArticleById(id);
-        ArticleDTO articleDTO = new ArticleDTO();
-        articleDTO.setId(article.getId());
-        articleDTO.setThemeId(article.getTheme().getId());
-        articleDTO.setTitle(article.getTitle());
-        articleDTO.setDate(article.getDate());
-        articleDTO.setText(article.getText());
-        articleDTO.setDescription(article.getDescription());
-        articleDTO.setFileName(article.getFileName());
-        articleDTO.setTag(article.getTag());
-
-        return articleDTO;
+        return ArticleDTO.fromArticleEntityToDTO(article);
     }
 
     @PostMapping("/article")
@@ -73,5 +52,10 @@ public class ArticleController {
         articleDTO.setTitle(title);
         articleDTO.setTheme(theme);
         return articleService.createArticle(articleDTO, picture);
+    }
+
+    @GetMapping("{tag}")
+    public Page<Article> getAllArticlesByTag(@PathVariable String tag, @RequestParam(defaultValue = "0") int pageNumber) {
+        return articleService.getAllArticlesByTag(pageNumber, tag);
     }
 }

@@ -14,6 +14,16 @@ public class Trip {
     @Column(name = "trip_id")
     private long id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="article_id")
+    private Article article;
+
+    @Column(name = "location")
+    private String location;
+
     @Column(name = "price")
     private double price;
+
+    @Column(name = "availability")
+    private Integer availability;
 }

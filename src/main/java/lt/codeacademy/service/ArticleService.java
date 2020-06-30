@@ -3,6 +3,9 @@ package lt.codeacademy.service;
 import lt.codeacademy.dto.ArticleDTO;
 import lt.codeacademy.entity.Article;
 import lt.codeacademy.repository.ArticleRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,12 +18,20 @@ public class ArticleService {
     private final ThemeService themeService;
     private FileStorageService fileStorageService;
 
-    public ArticleService(ArticleRepository articleRepository, ThemeService themeService) {
+    public ArticleService(ArticleRepository articleRepository, ThemeService themeService, FileStorageService fileStorageService) {
+        this.fileStorageService = fileStorageService;
         this.articleRepository = articleRepository;
         this.themeService = themeService;
     }
 
-    public List<Article> getAllArticles() {
+    public Page<Article> getAllArticlesByTheme(int pageNumber, Long themeId) {
+        Pageable pageable = PageRequest.of(pageNumber, 3);
+        if(themeId != null) {
+            return articleRepository.findArticlesByThemeId(themeId, pageable);
+        } else return articleRepository.findAll(pageable);
+    }
+
+    public List<Article> getAllArticles(){
         return articleRepository.findAll();
     }
 
@@ -33,14 +44,11 @@ public class ArticleService {
             articleDTO.setFileName(file.getOriginalFilename());
             fileStorageService.storeFile(file);
         }
-        Article article = new Article();
-        article.setDate(articleDTO.getDate());
-        article.setDescription(articleDTO.getDescription());
-        article.setFileName(articleDTO.getFileName());
-        article.setTag(articleDTO.getTag());
-        article.setTheme(themeService.findThemeById(articleDTO.getThemeId()));
-        article.setText(articleDTO.getText());
-        article.setTitle(articleDTO.getTitle());
-        return articleRepository.save(article);
+        return ArticleDTO.fromArticleDtoToArticleEntity(articleDTO);
+    }
+
+    public Page<Article> getAllArticlesByTag(int pageNumber, String tag) {
+        Pageable pageable = PageRequest.of(pageNumber, 3);
+        return articleRepository.findArticlesByTag(tag, pageable);
     }
 }
