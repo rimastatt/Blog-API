@@ -23,8 +23,11 @@ public class Article {
     @JoinColumn(name = "theme_id")
     private Theme theme;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="article")
+    @OneToMany(mappedBy="article")
     private List<Trip> trips = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy="article")
+    private List<Comment> comments = new ArrayList<>();
 
     @Column(name = "title", nullable = false)
     private String title;

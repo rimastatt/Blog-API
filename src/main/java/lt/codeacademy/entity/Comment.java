@@ -17,9 +17,13 @@ public class Comment {
     @Column(name="comment_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "article_id")
+    private Article article;
 
     @Column(name="message")
     private String message;
