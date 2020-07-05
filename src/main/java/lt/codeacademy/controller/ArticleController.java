@@ -4,6 +4,7 @@ import lt.codeacademy.dto.ArticleDTO;
 import lt.codeacademy.entity.Article;
 import lt.codeacademy.entity.Theme;
 import lt.codeacademy.service.ArticleService;
+import lt.codeacademy.service.CommentService;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,8 +17,10 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final CommentService commentService;
 
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(ArticleService articleService, CommentService commentService) {
+        this.commentService = commentService;
         this.articleService = articleService;
     }
 

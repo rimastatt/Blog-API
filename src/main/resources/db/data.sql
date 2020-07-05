@@ -26,3 +26,5 @@ insert into Articles(title, file_name, description, text, tag, theme_id) values(
 insert into Trips(article_id, file_name, location, price, availability) values(1,'fox.jpg', 'Paris', 599.99, 1);
 insert into Trips(article_id, file_name, location, price, availability) values(2,'fox.jpg','London', 2599.99, 0);
 insert into Trips(article_id, file_name, location, price, availability) values(2,'fox.jpg','Madrid', 1599.99, 1);
+
+insert into Comments(user_id, article_id, message) values(null, null, 'hello')
