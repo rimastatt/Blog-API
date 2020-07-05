@@ -22,7 +22,14 @@ public class ArticleController {
     }
 
     @GetMapping
-    public List<ArticleDTO> getArticlesByTheme(@RequestParam(defaultValue = "0") int pageNumber, @PathVariable(required = false) Long themeId) {
+    public List<ArticleDTO> getAllArticles(@RequestParam(defaultValue = "0") int pageNumber){
+        Page<Article> articlesEntityPage = articleService.getAllArticles(pageNumber);
+        List<Article> articlesEntity = articlesEntityPage.getContent();
+        return ArticleDTO.fromArticleEntityListToDTO(articlesEntity);
+    }
+
+    @GetMapping("{themeId}")
+    public List<ArticleDTO> getArticlesByTheme(@PathVariable(required = false) Long themeId, @RequestParam(defaultValue = "0") int pageNumber) {
         Page<Article> articlesEntityPage = articleService.getAllArticlesByTheme(pageNumber, themeId);
         List<Article> articlesEntity = articlesEntityPage.getContent();
         return ArticleDTO.fromArticleEntityListToDTO(articlesEntity);
@@ -51,11 +58,12 @@ public class ArticleController {
         articleDTO.setDate(date);
         articleDTO.setTitle(title);
         articleDTO.setTheme(theme);
-        return articleService.createArticle(articleDTO, picture);
+        return articleService.createArticle(ArticleDTO.fromArticleDtoToArticleEntity(articleDTO), picture);
+
     }
 
-    @GetMapping("{tag}")
-    public Page<Article> getAllArticlesByTag(@PathVariable String tag, @RequestParam(defaultValue = "0") int pageNumber) {
-        return articleService.getAllArticlesByTag(pageNumber, tag);
-    }
+//    @GetMapping("{tag}")
+//    public Page<Article> getAllArticlesByTag(@RequestParam String tag, @RequestParam(defaultValue = "0") int pageNumber) {
+//        return articleService.getAllArticlesByTag(pageNumber, tag);
+//    }
 }

@@ -4,8 +4,6 @@ import lt.codeacademy.entity.Trip;
 import lt.codeacademy.repository.TripRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service

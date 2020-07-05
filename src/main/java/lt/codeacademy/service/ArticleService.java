@@ -24,14 +24,17 @@ public class ArticleService {
         this.themeService = themeService;
     }
 
-    public Page<Article> getAllArticlesByTheme(int pageNumber, Long themeId) {
+    public Page<Article> getAllArticles(int pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber, 3);
-        if(themeId != null) {
-            return articleRepository.findArticlesByThemeId(themeId, pageable);
-        } else return articleRepository.findAll(pageable);
+        return articleRepository.findAll(pageable);
     }
 
-    public List<Article> getAllArticles(){
+    public Page<Article> getAllArticlesByTheme(int pageNumber, Long themeId) {
+        Pageable pageable = PageRequest.of(pageNumber, 3);
+        return articleRepository.findArticlesByThemeId(themeId, pageable);
+    }
+
+    public List<Article> getAllArticles() {
         return articleRepository.findAll();
     }
 
@@ -39,12 +42,12 @@ public class ArticleService {
         return articleRepository.getOne(id);
     }
 
-    public Article createArticle(ArticleDTO articleDTO, MultipartFile file) {
+    public Article createArticle(Article article, MultipartFile file) {
         if (file != null) {
-            articleDTO.setFileName(file.getOriginalFilename());
+            article.setFileName(file.getOriginalFilename());
             fileStorageService.storeFile(file);
         }
-        return ArticleDTO.fromArticleDtoToArticleEntity(articleDTO);
+        return article;
     }
 
     public Page<Article> getAllArticlesByTag(int pageNumber, String tag) {

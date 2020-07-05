@@ -14,6 +14,7 @@ public class TripDTO {
     private Long id;
     private Long articleId;
     private Integer availability;
+    private String fileName;
 
     public static List<TripDTO> toTripDtoList(List<Trip> trips) {
         List<TripDTO> tripsDTO = trips
@@ -23,6 +24,7 @@ public class TripDTO {
                     tripDTO.setAvailability(trip.getAvailability());
                     tripDTO.setId(trip.getId());
                     tripDTO.setLocation(trip.getLocation());
+                    tripDTO.setFileName(trip.getFileName());
                     tripDTO.setPrice(trip.getPrice());
                     tripDTO.setArticleId(trip.getArticle().getId());
                     return tripDTO;

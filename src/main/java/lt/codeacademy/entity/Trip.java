@@ -21,6 +21,9 @@ public class Trip {
     @Column(name = "location")
     private String location;
 
+    @Column(name = "file_name")
+    private String fileName;
+
     @Column(name = "price")
     private double price;
 

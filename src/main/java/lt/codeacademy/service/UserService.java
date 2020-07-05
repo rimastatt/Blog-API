@@ -14,21 +14,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User saveUser(UserDTO userDTO) {
-        User user = new User();
-        user.setAge(userDTO.getAge());
-        user.setEmail(userDTO.getEmail());
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setPassword(userDTO.getPassword());
-        user.setUsername(userDTO.getUsername());
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
-    public User getUser(User user){
-        if(user.getId() != null) {
+    public User getUser(User user) {
+        if (user.getId() != null) {
             return userRepository.getOne(user.getId());
-        }
-        else return null;
+        } else return null;
     }
 }

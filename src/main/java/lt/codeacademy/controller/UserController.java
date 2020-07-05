@@ -16,20 +16,7 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public User createUser(@RequestParam(name = "username") String username,
-                           @RequestParam(name = "password)") String password,
-                           @RequestParam(name = "firstName") String firsName,
-                           @RequestParam(name = "lastName") String lastName,
-                           @RequestParam(name = "email") String email,
-                           @RequestParam(name = "age") Integer age) {
-
-        UserDTO userDTO = new UserDTO();
-        userDTO.setAge(age);
-        userDTO.setEmail(email);
-        userDTO.setFirstName(firsName);
-        userDTO.setLastName(lastName);
-        userDTO.setPassword(password);
-        userDTO.setUsername(username);
-        return userService.saveUser(userDTO);
+    public User createUser(@RequestBody UserDTO userDTO) {
+        return userService.saveUser(UserDTO.createUserEntityFromUserDTO(userDTO));
     }
 }
