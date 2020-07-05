@@ -2,16 +2,19 @@ package lt.codeacademy.entity;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
-@Table(name="User")
+@Table(name="Users")
 public class User implements UserDetails {
 
     @Id
@@ -22,27 +25,37 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Users_Roles",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") }
+    )
+    private Set<Role> roles;
+
     @Column(name = "Username", nullable = false)
     private String username;
 
     @Column(name = "Password", nullable = false)
     private String password;
 
-    @Column(name = "First_name", nullable = false)
+    @Column(name = "First_name")
     private String firstName;
 
-    @Column(name = "Last_name", nullable = false)
+    @Column(name = "Last_name")
     private String lastName;
 
-    @Column(name = "Email", nullable = false)
+    @Column(name = "Email")
     private String email;
 
-    @Column(name = "Age", nullable = false)
+    @Column(name = "Age")
     private Integer age;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
+                .collect(Collectors.toSet());
     }
 
     @Override
