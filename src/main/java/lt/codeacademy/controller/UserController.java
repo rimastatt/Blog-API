@@ -3,6 +3,7 @@ package lt.codeacademy.controller;
 import lt.codeacademy.dto.UserDTO;
 import lt.codeacademy.entity.User;
 import lt.codeacademy.service.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +16,18 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public UserDTO getUser(@AuthenticationPrincipal User user){
+        return new UserDTO(user);
+    }
+
     @PostMapping("/new")
     public User createUser(@RequestBody UserDTO userDTO) {
+        return userService.saveUser(UserDTO.createUserEntityFromUserDTO(userDTO));
+    }
+
+    @PostMapping("/userInfo")
+    public User updateUser(@RequestBody UserDTO userDTO){
         return userService.saveUser(UserDTO.createUserEntityFromUserDTO(userDTO));
     }
 }

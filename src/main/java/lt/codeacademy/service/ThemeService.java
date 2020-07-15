@@ -20,6 +20,6 @@ public class ThemeService {
     }
 
     public Theme findThemeById(Long id){
-        return themeRepository.getOne(id);
+        return themeRepository.findById(id).orElseThrow(() -> new RuntimeException());
     }
 }

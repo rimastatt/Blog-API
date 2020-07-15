@@ -12,4 +12,9 @@ public class ThemeDTO {
     private String name;
     private String picture;
     private String description;
+
+    @Override
+    public String toString() {
+        return null;
+    }
 }

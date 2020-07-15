@@ -19,15 +19,9 @@ public class Article {
     @Column(name = "article_id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "theme_id")
     private Theme theme;
-
-    @OneToMany(mappedBy="article")
-    private List<Trip> trips = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy="article")
-    private List<Comment> comments = new ArrayList<>();
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -38,7 +32,7 @@ public class Article {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "text", nullable = false)
+    @Column(name = "text", nullable = false, columnDefinition="LONGTEXT")
     private String text;
 
     @Column(name = "tag", nullable = false)
@@ -48,4 +42,9 @@ public class Article {
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "publish_date")
     private Date date;
+
+    @Override
+    public String toString() {
+        return null;
+    }
 }

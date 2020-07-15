@@ -3,8 +3,6 @@ package lt.codeacademy.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -16,9 +14,6 @@ public class Theme {
     @Column(name="theme_id")
     private Long id;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="theme")
-    private List<Article> articles = new ArrayList();
-
     @Column(name="name")
     private String name;
 
@@ -28,4 +23,8 @@ public class Theme {
     @Column(name = "picture")
     private String picture;
 
+    @Override
+    public String toString() {
+        return null;
+    }
 }

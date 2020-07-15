@@ -24,7 +24,7 @@ public class TripController {
         return TripDTO.toTripDtoList(tripService.getAllTrips());
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/trip/{id}")
     public List<TripDTO> getAllTripsByArticleId(@PathVariable Long id) {
         return TripDTO.toTripDtoList(tripService.getAllTripsByArticleId(id));
     }

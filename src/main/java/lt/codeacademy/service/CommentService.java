@@ -27,9 +27,7 @@ public class CommentService {
         commentRepository.deleteById(id);
     }
 
-    public void saveOrUpdateComment(User user, Comment comment, Long articleId){
-        Article article = articleService.getArticleById(articleId);
-        comment.setUser(user);
-        comment.setArticle(article);
+    public void saveOrUpdateComment(Comment comment){
+        commentRepository.save(comment);
     }
 }

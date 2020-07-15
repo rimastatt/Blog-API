@@ -1,7 +1,6 @@
 package lt.codeacademy.controller;
 
 import lt.codeacademy.dto.ThemeDTO;
-import lt.codeacademy.entity.Article;
 import lt.codeacademy.entity.Theme;
 import lt.codeacademy.service.ThemeService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/themes")
@@ -32,10 +31,6 @@ public class ThemeController {
             themeDTO.setDescription(theme.getDescription());
             themeDTO.setId(theme.getId());
             themeDTO.setPicture(theme.getPicture());
-            themeDTO.setArticlesId(theme.getArticles()
-                    .stream()
-                    .map(Article::getId)
-                    .collect(Collectors.toList()));
             themeDTOList.add(themeDTO);
         }
         return themeDTOList;

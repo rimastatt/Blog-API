@@ -25,6 +25,9 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
+    private List<Trip> trips = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Users_Roles",
@@ -33,10 +36,10 @@ public class User implements UserDetails {
     )
     private Set<Role> roles;
 
-    @Column(name = "Username", nullable = false)
+    @Column(name = "Username")
     private String username;
 
-    @Column(name = "Password", nullable = false)
+    @Column(name = "Password")
     private String password;
 
     @Column(name = "First_name")

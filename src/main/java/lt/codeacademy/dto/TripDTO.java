@@ -13,6 +13,8 @@ public class TripDTO {
     private String location;
     private Long id;
     private Long articleId;
+    private String description;
+    private Integer days;
     private Integer availability;
     private String fileName;
 
@@ -26,10 +28,14 @@ public class TripDTO {
                     tripDTO.setLocation(trip.getLocation());
                     tripDTO.setFileName(trip.getFileName());
                     tripDTO.setPrice(trip.getPrice());
+                    tripDTO.setDescription(trip.getDescription());
+                    tripDTO.setDays(trip.getDays());
                     tripDTO.setArticleId(trip.getArticle().getId());
                     return tripDTO;
                 }).collect(Collectors.toList());
 
         return tripsDTO;
     }
+
+
 }

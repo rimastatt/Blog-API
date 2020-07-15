@@ -14,9 +14,13 @@ public class Trip {
     @Column(name = "trip_id")
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="article_id")
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "article_id")
     private Article article;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "location")
     private String location;
@@ -26,6 +30,12 @@ public class Trip {
 
     @Column(name = "price")
     private double price;
+
+    @Column(name = "days", nullable = false)
+    private int days;
+
+    @Column(name = "description", columnDefinition = "LONGTEXT")
+    private String description;
 
     @Column(name = "availability")
     private Integer availability;

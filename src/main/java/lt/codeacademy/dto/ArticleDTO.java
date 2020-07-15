@@ -1,6 +1,5 @@
 package lt.codeacademy.dto;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 import lt.codeacademy.entity.Article;
 import lt.codeacademy.entity.Theme;
@@ -9,7 +8,9 @@ import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Data
+
 public class ArticleDTO {
 
     private Long id;
@@ -21,6 +22,9 @@ public class ArticleDTO {
     private String tag;
     private Date date;
     private Theme theme;
+
+    public ArticleDTO(){
+    }
 
     public static List<ArticleDTO> fromArticleEntityListToDTO(List<Article> articleEntityList) {
         List<ArticleDTO> articleDTOS = articleEntityList
@@ -62,5 +66,10 @@ public class ArticleDTO {
         article.setTag(articleDTO.getTag());
         article.setDescription(articleDTO.getDescription());
         return article;
+    }
+
+    @Override
+    public String toString() {
+        return null;
     }
 }
