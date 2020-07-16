@@ -16,6 +16,11 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    public User findUserByEmail(String email){
+        return userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User was not found"));
+    }
+
     public User saveUser(User user) {
         return userRepository.save(user);
     }

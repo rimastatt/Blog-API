@@ -43,7 +43,7 @@ public class ArticleService {
     }
 
     public Article getArticleById(Long id) {
-        return articleRepository.getOne(id);
+        return articleRepository.findById(id).orElseThrow(() -> new RuntimeException("Article was not found"));
     }
 
 

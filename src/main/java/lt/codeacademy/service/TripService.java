@@ -22,4 +22,8 @@ public class TripService  {
     public List<Trip> getAllTripsByArticleId(Long articleId){
         return tripRepository.getTripsByArticleId(articleId);
     }
+
+    public Trip findTripByLocation(String location){
+        return tripRepository.getTripByLocation(location);
+    }
 }
