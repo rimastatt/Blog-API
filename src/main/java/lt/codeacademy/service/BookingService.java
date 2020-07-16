@@ -15,8 +15,8 @@ public class BookingService {
         this.bookingRepository = bookingRepository;
     }
 
-    public List<Booking> getAllBookings(){
-        return bookingRepository.findAll();
+    public List<Booking> findBookingsByUserId(Long id){
+        return bookingRepository.findBookingByUserId(id);
     }
 
     public Booking saveBooking(Booking booking){
