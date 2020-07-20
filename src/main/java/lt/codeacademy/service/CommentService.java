@@ -27,7 +27,7 @@ public class CommentService {
         commentRepository.deleteById(id);
     }
 
-    public void saveOrUpdateComment(Comment comment){
-        commentRepository.save(comment);
+    public Comment saveOrUpdateComment(Comment comment){
+        return commentRepository.save(comment);
     }
 }

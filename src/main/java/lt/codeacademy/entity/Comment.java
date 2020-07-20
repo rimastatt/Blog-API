@@ -33,4 +33,8 @@ public class Comment {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
+    @Override
+    public String toString() {
+        return null;
+    }
 }

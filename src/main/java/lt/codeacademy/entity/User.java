@@ -1,5 +1,6 @@
 package lt.codeacademy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,10 +23,8 @@ public class User implements UserDetails {
     @Column(name="user_id")
     private Long id;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
-
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
+    @JsonIgnore
     private List<Trip> trips = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -79,5 +78,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return null;
     }
 }
