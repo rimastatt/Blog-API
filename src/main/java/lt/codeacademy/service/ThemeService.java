@@ -22,4 +22,8 @@ public class ThemeService {
     public Theme findThemeById(Long id){
         return themeRepository.findById(id).orElseThrow(() -> new RuntimeException());
     }
+
+    public Theme findThemeByName(String name){
+        return themeRepository.findThemeByName(name);
+    }
 }

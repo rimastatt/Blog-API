@@ -1,11 +1,15 @@
 package lt.codeacademy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,23 +21,33 @@ public class Article {
     @Column(name = "article_id")
     private Long id;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "article")
+    @JsonIgnore
+    private List<Trip> trips = new ArrayList<>();
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "theme_id")
     private Theme theme;
 
-    @Column(name = "title", nullable = false)
+    @NotNull
+    @Column(name = "title")
     private String title;
 
+    @NotNull
     @Column(name = "file_name")
     private String fileName;
 
-    @Column(name = "description", nullable = false)
+    @NotNull
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "text", nullable = false, columnDefinition="LONGTEXT")
+    @NotNull
+    @Column(name = "text", columnDefinition="LONGTEXT")
     private String text;
 
-    @Column(name = "tag", nullable = false)
+    @NotNull
+    @Column(name = "tag")
     private String tag;
 
     @CreationTimestamp

@@ -2,11 +2,15 @@ package lt.codeacademy.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,12 +19,12 @@ import java.util.stream.Collectors;
 
 @Entity
 @Data
-@Table(name="Users")
+@Table(name = "Users")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private Long id;
 
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
@@ -30,27 +34,37 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Users_Roles",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "role_id") }
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     private Set<Role> roles;
 
-    @Column(name = "Username")
+    @NotNull
+    @Column(name = "Username", nullable = false, unique = true)
+    @Size(min = 4, max = 20)
     private String username;
 
-    @Column(name = "Password")
+    @NotNull
+    @Column(name = "Password", nullable = false)
+    @Size(min = 4)
     private String password;
 
-    @Column(name = "First_name")
+    @NotEmpty
+    @Column(name = "First_name", nullable = false)
+    @Size(min = 2, max = 20)
     private String firstName;
 
-    @Column(name = "Last_name")
+    @NotNull
+    @Column(name = "Last_name", nullable = false)
+    @Size(min = 2, max = 20)
     private String lastName;
 
-    @Column(name = "Email")
+    @NotNull
+    @Column(name = "Email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "Age")
+    @NotNull
+    @Column(name = "Age", nullable = false)
     private Integer age;
 
     @Override

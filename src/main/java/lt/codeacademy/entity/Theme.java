@@ -3,6 +3,7 @@ package lt.codeacademy.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Data
@@ -14,9 +15,11 @@ public class Theme {
     @Column(name="theme_id")
     private Long id;
 
+    @NotEmpty
     @Column(name="name")
     private String name;
 
+    @NotEmpty
     @Column(name="description")
     private String description;
 

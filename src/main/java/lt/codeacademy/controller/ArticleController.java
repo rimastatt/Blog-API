@@ -10,14 +10,20 @@ import lt.codeacademy.service.CommentService;
 import lt.codeacademy.service.ThemeService;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@Validated
 @RequestMapping("/articles")
 public class ArticleController {
 
@@ -58,12 +64,12 @@ public class ArticleController {
     @PostMapping("/article/new")
 
     public Article createArticle(
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "theme") Long theme,
-            @RequestParam(name = "picture", required = false) MultipartFile picture,
-            @RequestParam(name = "description") String description,
-            @RequestParam(name = "text") String text,
-            @RequestParam(name = "tag") String tag,
+            @RequestParam(name = "title") @NotEmpty @Size(min = 3, max = 20) String title ,
+            @RequestParam(name = "theme") @NotNull String theme,
+            @RequestParam(name = "picture", required = false) @NotEmpty MultipartFile picture,
+            @RequestParam(name = "description") @NotEmpty String description,
+            @RequestParam(name = "text") @NotEmpty String text,
+            @RequestParam(name = "tag") @NotEmpty String tag,
             @RequestParam(name = "date", required = false) Date date) {
         ArticleDTO articleDTO = new ArticleDTO();
         articleDTO.setTag(tag);
@@ -71,7 +77,7 @@ public class ArticleController {
         articleDTO.setText(text);
         articleDTO.setDate(date);
         articleDTO.setTitle(title);
-        articleDTO.setTheme(themeService.findThemeById(theme));
+        articleDTO.setTheme(themeService.findThemeByName(theme));
         return articleService.createArticle(ArticleDTO.fromArticleDtoToArticleEntity(articleDTO), picture);
     }
 
@@ -88,15 +94,10 @@ public class ArticleController {
     }
 
     @PostMapping("/article/{articleId}")
-    public Comment submitComment(@RequestBody Comment comment, @AuthenticationPrincipal User user, @PathVariable Long articleId) {
+    public Comment submitComment(@RequestBody @Valid Comment comment, @AuthenticationPrincipal User user, @PathVariable Long articleId) {
         comment.setArticle(articleService.getArticleById(articleId));
         comment.setUser(user);
         return commentService.saveOrUpdateComment(comment);
 
-    } 
-
-//    @GetMapping("{tag}")
-//    public Page<Article> getAllArticlesByTag(@RequestParam String tag, @RequestParam(defaultValue = "0") int pageNumber) {
-//        return articleService.getAllArticlesByTag(pageNumber, tag);
-//    }
+    }
 }

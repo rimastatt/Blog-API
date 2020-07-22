@@ -3,13 +3,14 @@ package lt.codeacademy.dto;
 import lombok.Data;
 import lt.codeacademy.entity.Trip;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 public class TripDTO {
 
-    private Double price;
+    private BigDecimal price;
     private String location;
     private Long id;
     private Long articleId;

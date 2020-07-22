@@ -1,5 +1,6 @@
 package lt.codeacademy.controller;
 
+import lt.codeacademy.dto.BookingDTO;
 import lt.codeacademy.entity.Booking;
 import lt.codeacademy.entity.Trip;
 import lt.codeacademy.entity.User;
@@ -7,13 +8,20 @@ import lt.codeacademy.service.BookingService;
 import lt.codeacademy.service.TripService;
 import lt.codeacademy.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 @RestController
+@Validated
 @RequestMapping("/booking")
 public class BookingController {
 
@@ -33,14 +41,14 @@ public class BookingController {
     }
 
     @PostMapping
-    public Booking submitBooking(@RequestParam String email,
-                                 @RequestParam String location,
-                                 @RequestParam String travelClass,
-                                 @RequestParam String checkOutDate,
-                                 @RequestParam String checkInDate,
-                                 @RequestParam Integer adults,
-                                 @RequestParam Integer children,
-                                 @RequestParam Double totalPrice
+    public Booking submitBooking(@RequestParam @NotEmpty String email,
+                                 @RequestParam @NotEmpty String location,
+                                 @RequestParam @NotEmpty String travelClass,
+                                 @RequestParam @NotEmpty String checkOutDate,
+                                 @RequestParam @NotEmpty String checkInDate,
+                                 @RequestParam @Min(1) @Max(1)Integer adults,
+                                 @RequestParam @Min(1) @Max(1)Integer children,
+                                 @RequestParam BigDecimal totalPrice
     ) throws ParseException {
         User user = userService.findUserByEmail(email);
         Trip trip = tripService.findTripByLocation(location);
@@ -57,7 +65,10 @@ public class BookingController {
     }
 
     @GetMapping("/info")
-    public List<Booking> getBookingsByUserId(@AuthenticationPrincipal User user){
-        return bookingService.findBookingsByUserId(user.getId());
+    public List<BookingDTO> getBookingsByUserId(@AuthenticationPrincipal User user){
+        List<Booking> bookings = bookingService.findBookingsByUserId(user.getId());
+        return bookings.stream()
+                .map(BookingDTO::new)
+                .collect(Collectors.toList());
     }
 }

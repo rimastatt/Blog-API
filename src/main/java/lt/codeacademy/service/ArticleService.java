@@ -63,9 +63,4 @@ public class ArticleService {
         }
         return articleRepository.save(article);
     }
-
-    public Page<Article> getAllArticlesByTag(int pageNumber, String tag, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        return articleRepository.findArticlesByTag(tag, pageable);
-    }
 }

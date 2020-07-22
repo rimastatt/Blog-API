@@ -3,6 +3,8 @@ package lt.codeacademy.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -22,18 +24,21 @@ public class Trip {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NotEmpty
     @Column(name = "location")
     private String location;
 
     @Column(name = "file_name")
     private String fileName;
 
+    @NotEmpty
     @Column(name = "price")
-    private double price;
+    private BigDecimal price;
 
     @Column(name = "days", nullable = false)
     private int days;
 
+    @NotEmpty
     @Column(name = "description", columnDefinition = "LONGTEXT")
     private String description;
 

@@ -3,6 +3,7 @@ package lt.codeacademy.controller;
 import lt.codeacademy.dto.ThemeDTO;
 import lt.codeacademy.entity.Theme;
 import lt.codeacademy.service.ThemeService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @RestController
+@Validated
 @RequestMapping("/themes")
 public class ThemeController {
 

@@ -10,19 +10,17 @@ public class CommentDTO {
 
     private String message;
     private Long articleId;
-    private Long UserId;
+    private String userName;
     private LocalDateTime date;
 
     public CommentDTO(Comment comment) {
         this.message = comment.getMessage();
-        //this.articleId = comment.getArticle().getId();
-        this.UserId = comment.getUser().getId();
+        this.userName = comment.getUser().getUsername();
         this.date = comment.getCreationDate();
     }
 
     public static Comment fromDtoToEntity(CommentDTO commentDTO){
         Comment comment = new Comment();
-        //comment.setArticle(null);
         comment.setUser(null);
         comment.setMessage(commentDTO.getMessage());
         comment.setCreationDate(commentDTO.getDate());

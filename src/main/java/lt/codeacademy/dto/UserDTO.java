@@ -4,6 +4,7 @@ import lombok.Data;
 import lt.codeacademy.entity.Role;
 import lt.codeacademy.entity.User;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,11 +12,17 @@ import java.util.stream.Collectors;
 public class UserDTO {
     private Long id;
     private Set<String> roles;
+    @NotEmpty
     private String username;
+    @NotEmpty
     private String password;
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
+    @NotEmpty
     private String email;
+    @NotEmpty
     private Integer age;
 
     public UserDTO(){

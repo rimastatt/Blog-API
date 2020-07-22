@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 
 @Data
-
 public class ArticleDTO {
 
     private Long id;
