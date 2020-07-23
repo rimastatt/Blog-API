@@ -63,10 +63,6 @@ public class User implements UserDetails {
     @Column(name = "Email", nullable = false, unique = true)
     private String email;
 
-    @NotNull
-    @Column(name = "Age", nullable = false)
-    private Integer age;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()

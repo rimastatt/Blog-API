@@ -22,8 +22,6 @@ public class UserDTO {
     private String lastName;
     @NotEmpty
     private String email;
-    @NotEmpty
-    private Integer age;
 
     public UserDTO(){
 
@@ -36,7 +34,6 @@ public class UserDTO {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
-        this.age = user.getAge();
         this.roles = user.getRoles()
                 .stream()
                 .map(Role::getRole)
@@ -46,7 +43,6 @@ public class UserDTO {
    public static User createUserEntityFromUserDTO(UserDTO userDTO){
        User user = new User();
        user.setId(userDTO.getId());
-       user.setAge(userDTO.getAge());
        user.setEmail(userDTO.getEmail());
        user.setFirstName(userDTO.getFirstName());
        user.setLastName(userDTO.getLastName());

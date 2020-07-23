@@ -32,10 +32,10 @@ insert into Articles(title, file_name, description, text, tag, theme_id) values(
 insert into Trips(article_id, file_name, location, price, description, days) values(1,'fox.jpg', 'Paris', 599.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at sem eget diam pellentesque porttitor. Etiam id tellus ut nibh cursus imperdiet...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at sem eget diam pellentesque porttitor. Etiam id tellus ut nibh cursus imperdiet...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at sem eget diam pellentesque porttitor. Etiam id tellus ut nibh cursus imperdiet...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at sem eget diam pellentesque porttitor. Etiam id tellus ut nibh cursus imperdiet...Lorem ipsum dolor sit amet, consecteturcursus imperdiet', 5);
 insert into Trips(article_id, file_name, location, price, description, days) values(2,'fox.jpg', 'London', 599.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at sem eget diam pellentesque porttitor. Etiam id tellus ut nibh cursus imperdiet...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at sem eget diam pellentesque porttitor. Etiam id tellus ut nibh cursus imperdiet...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at sem eget diam pellentesque porttitor. Etiam id tellus ut nibh cursus imperdiet...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at sem eget diam pellentesque porttitor. Etiam id tellus ut nibh cursus imperdiet...Lorem ipsum dolor sit amet, consecteturcursus imperdiet', 5);
 
-insert into Users(user_id, username, password, First_name, Last_name, Email, Age)
-    values(1, 'user', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'Johns', 'Doesss', 'rimastatt@gmail.com', 22);
-insert into Users(user_id, username, password, First_name, Last_name, Email, Age)
-    values(2, 'admin', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'Jackz', 'Sparrowsss', 'admin@adming.com', 100);
+insert into Users(user_id, username, password, First_name, Last_name, Email)
+    values(1, 'user', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'Johns', 'Doesss', 'rimastatt@gmail.com');
+insert into Users(user_id, username, password, First_name, Last_name, Email)
+    values(2, 'admin', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'Jackz', 'Sparrowsss', 'admin@adming.com');
 
 insert into Roles(role_id, role) values(1, 'CUSTOMER');
 insert into Roles(role_id, role) values(2, 'ADMIN');

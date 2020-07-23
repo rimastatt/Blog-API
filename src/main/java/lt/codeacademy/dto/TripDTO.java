@@ -16,7 +16,6 @@ public class TripDTO {
     private Long articleId;
     private String description;
     private Integer days;
-    private Integer availability;
     private String fileName;
 
     public static List<TripDTO> toTripDtoList(List<Trip> trips) {
@@ -24,7 +23,6 @@ public class TripDTO {
                 .stream()
                 .map(trip -> {
                     TripDTO tripDTO = new TripDTO();
-                    tripDTO.setAvailability(trip.getAvailability());
                     tripDTO.setId(trip.getId());
                     tripDTO.setLocation(trip.getLocation());
                     tripDTO.setFileName(trip.getFileName());

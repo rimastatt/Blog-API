@@ -46,8 +46,8 @@ public class BookingController {
                                  @RequestParam @NotEmpty String travelClass,
                                  @RequestParam @NotEmpty String checkOutDate,
                                  @RequestParam @NotEmpty String checkInDate,
-                                 @RequestParam @Min(1) @Max(1)Integer adults,
-                                 @RequestParam @Min(1) @Max(1)Integer children,
+                                 @RequestParam @Min(1) @Max(9)Integer adults,
+                                 @RequestParam @Min(1) @Max(9)Integer children,
                                  @RequestParam BigDecimal totalPrice
     ) throws ParseException {
         User user = userService.findUserByEmail(email);

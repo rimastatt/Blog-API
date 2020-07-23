@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -62,11 +61,10 @@ public class ArticleController {
     }
 
     @PostMapping("/article/new")
-
     public Article createArticle(
             @RequestParam(name = "title") @NotEmpty @Size(min = 3, max = 20) String title ,
             @RequestParam(name = "theme") @NotNull String theme,
-            @RequestParam(name = "picture", required = false) @NotEmpty MultipartFile picture,
+            @RequestParam(name = "file") MultipartFile file,
             @RequestParam(name = "description") @NotEmpty String description,
             @RequestParam(name = "text") @NotEmpty String text,
             @RequestParam(name = "tag") @NotEmpty String tag,
@@ -78,7 +76,27 @@ public class ArticleController {
         articleDTO.setDate(date);
         articleDTO.setTitle(title);
         articleDTO.setTheme(themeService.findThemeByName(theme));
-        return articleService.createArticle(ArticleDTO.fromArticleDtoToArticleEntity(articleDTO), picture);
+        return articleService.createArticle(ArticleDTO.fromArticleDtoToArticleEntity(articleDTO), file);
+    }
+
+    @PostMapping("/article/update")
+    public Article updateArticle(
+            @RequestParam(name = "id") Long id,
+            @RequestParam(name = "title") @NotEmpty @Size(min = 3, max = 20) String title,
+            @RequestParam(name = "theme") @NotNull String theme,
+            @RequestParam(name = "file", required = false) MultipartFile file,
+            @RequestParam(name = "description") @NotEmpty String description,
+            @RequestParam(name = "text") @NotEmpty String text,
+            @RequestParam(name = "tag") @NotEmpty String tag,
+            @RequestParam(name = "date", required = false) Date date) {
+       Article article = new Article();
+       article.setId(id);
+       article.setDescription(description);
+       article.setTag(tag);
+       article.setText(text);
+       article.setTitle(title);
+       article.setTheme(themeService.findThemeByName(theme));
+       return articleService.createArticle(article, file);
     }
 
     @CrossOrigin
@@ -94,7 +112,7 @@ public class ArticleController {
     }
 
     @PostMapping("/article/{articleId}")
-    public Comment submitComment(@RequestBody @Valid Comment comment, @AuthenticationPrincipal User user, @PathVariable Long articleId) {
+    public Comment submitComment(@RequestBody Comment comment, @AuthenticationPrincipal User user, @PathVariable Long articleId) {
         comment.setArticle(articleService.getArticleById(articleId));
         comment.setUser(user);
         return commentService.saveOrUpdateComment(comment);

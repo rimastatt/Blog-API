@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class ArticleDTO {
 
     private Long id;
-    private Long themeId;
+    private String themeLocation;
     private String title;
     private String fileName;
     private String description;
@@ -33,7 +33,7 @@ public class ArticleDTO {
                     articleDTO.setId(articleEntity.getId());
                     articleDTO.setFileName(articleEntity.getFileName());
                     articleDTO.setTitle(articleEntity.getTitle());
-                    articleDTO.setThemeId(articleEntity.getTheme().getId());
+                    articleDTO.setThemeLocation(articleEntity.getTheme().getName());
                     articleDTO.setDate(articleEntity.getDate());
                     articleDTO.setText(articleEntity.getText());
                     articleDTO.setTag(articleEntity.getTag());
@@ -49,7 +49,7 @@ public class ArticleDTO {
         articleDTO.setId(articleEntity.getId());
         articleDTO.setFileName(articleEntity.getFileName());
         articleDTO.setTitle(articleEntity.getTitle());
-        articleDTO.setThemeId(articleEntity.getTheme().getId());
+        articleDTO.setThemeLocation(articleEntity.getTheme().getName());
         articleDTO.setDate(articleEntity.getDate());
         articleDTO.setText(articleEntity.getText());
         articleDTO.setTag(articleEntity.getTag());

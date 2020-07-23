@@ -46,7 +46,6 @@ public class Booking {
     @Max(value = 9, message = "Cannot book more than 9 children")
     private Integer numberOfChildren;
 
-    @NotNull
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 }

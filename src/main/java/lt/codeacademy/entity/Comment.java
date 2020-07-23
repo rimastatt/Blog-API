@@ -24,7 +24,6 @@ public class Comment {
     @JoinColumn(name = "user_id" )
     private User user;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "article_id")
     private Article article;
@@ -33,7 +32,6 @@ public class Comment {
     @Column(name="message", length = 50)
     private String message;
 
-    @NotNull
     @CreationTimestamp
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "creation_date")

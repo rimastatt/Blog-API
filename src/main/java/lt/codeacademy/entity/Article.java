@@ -34,7 +34,6 @@ public class Article {
     @Column(name = "title")
     private String title;
 
-    @NotNull
     @Column(name = "file_name")
     private String fileName;
 
