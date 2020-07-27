@@ -53,6 +53,7 @@ public class BookingController {
         User user = userService.findUserByEmail(email);
         Trip trip = tripService.findTripByLocation(location);
         Booking booking = new Booking();
+        booking.setTotalPrice(trip.getPrice());
         booking.setTrip(trip);
         booking.setUser(user);
         booking.setTravelClass(travelClass);
@@ -60,7 +61,6 @@ public class BookingController {
         booking.setCheckOutDate(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate).getTime()));
         booking.setNumberOfAdults(adults);
         booking.setNumberOfChildren(children);
-        booking.setTotalPrice(totalPrice);
         return bookingService.saveBooking(booking);
     }
 

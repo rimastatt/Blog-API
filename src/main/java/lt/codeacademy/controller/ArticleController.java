@@ -62,7 +62,7 @@ public class ArticleController {
 
     @PostMapping("/article/new")
     public Article createArticle(
-            @RequestParam(name = "title") @NotEmpty @Size(min = 3, max = 20) String title ,
+            @RequestParam(name = "title") @NotEmpty @Size(min = 3, max = 20) String title,
             @RequestParam(name = "theme") @NotNull String theme,
             @RequestParam(name = "file") MultipartFile file,
             @RequestParam(name = "description") @NotEmpty String description,
@@ -89,14 +89,14 @@ public class ArticleController {
             @RequestParam(name = "text") @NotEmpty String text,
             @RequestParam(name = "tag") @NotEmpty String tag,
             @RequestParam(name = "date", required = false) Date date) {
-       Article article = new Article();
-       article.setId(id);
-       article.setDescription(description);
-       article.setTag(tag);
-       article.setText(text);
-       article.setTitle(title);
-       article.setTheme(themeService.findThemeByName(theme));
-       return articleService.createArticle(article, file);
+        Article article = new Article();
+        article.setId(id);
+        article.setDescription(description);
+        article.setTag(tag);
+        article.setText(text);
+        article.setTitle(title);
+        article.setTheme(themeService.findThemeByName(theme));
+        return articleService.createArticle(article, file);
     }
 
     @CrossOrigin

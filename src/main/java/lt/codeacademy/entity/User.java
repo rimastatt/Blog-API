@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Data
-@Table(name = "Users")
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id

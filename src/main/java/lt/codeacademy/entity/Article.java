@@ -38,11 +38,11 @@ public class Article {
     private String fileName;
 
     @NotNull
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "LONGTEXT")
     private String description;
 
     @NotNull
-    @Column(name = "text", columnDefinition="LONGTEXT")
+    @Column(name = "text", columnDefinition = "LONGTEXT")
     private String text;
 
     @NotNull
